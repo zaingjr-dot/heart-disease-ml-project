@@ -1,0 +1,1322 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "e0b0e0d1-99f6-4dc2-b422-29f81e5de9f5",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "hello\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"hello\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "f4249db3-6a81-4003-b9b0-0ac420bfbd92",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "517f529a-2691-453c-885d-61eadff37cdd",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "FileNotFoundError",
+     "evalue": "[Errno 2] No such file or directory: 'heart.xlsx'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mFileNotFoundError\u001b[0m                         Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[3], line 3\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;21;01mpandas\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;28;01mas\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;21;01mpd\u001b[39;00m\n\u001b[1;32m----> 3\u001b[0m df \u001b[38;5;241m=\u001b[39m pd\u001b[38;5;241m.\u001b[39mread_excel(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mheart.xlsx\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n\u001b[0;32m      4\u001b[0m df\u001b[38;5;241m.\u001b[39mhead()\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\io\\excel\\_base.py:495\u001b[0m, in \u001b[0;36mread_excel\u001b[1;34m(io, sheet_name, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, date_format, thousands, decimal, comment, skipfooter, storage_options, dtype_backend, engine_kwargs)\u001b[0m\n\u001b[0;32m    493\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(io, ExcelFile):\n\u001b[0;32m    494\u001b[0m     should_close \u001b[38;5;241m=\u001b[39m \u001b[38;5;28;01mTrue\u001b[39;00m\n\u001b[1;32m--> 495\u001b[0m     io \u001b[38;5;241m=\u001b[39m ExcelFile(\n\u001b[0;32m    496\u001b[0m         io,\n\u001b[0;32m    497\u001b[0m         storage_options\u001b[38;5;241m=\u001b[39mstorage_options,\n\u001b[0;32m    498\u001b[0m         engine\u001b[38;5;241m=\u001b[39mengine,\n\u001b[0;32m    499\u001b[0m         engine_kwargs\u001b[38;5;241m=\u001b[39mengine_kwargs,\n\u001b[0;32m    500\u001b[0m     )\n\u001b[0;32m    501\u001b[0m \u001b[38;5;28;01melif\u001b[39;00m engine \u001b[38;5;129;01mand\u001b[39;00m engine \u001b[38;5;241m!=\u001b[39m io\u001b[38;5;241m.\u001b[39mengine:\n\u001b[0;32m    502\u001b[0m     \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mValueError\u001b[39;00m(\n\u001b[0;32m    503\u001b[0m         \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mEngine should not be specified when passing \u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m    504\u001b[0m         \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124man ExcelFile - ExcelFile already has the engine set\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m    505\u001b[0m     )\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\io\\excel\\_base.py:1550\u001b[0m, in \u001b[0;36mExcelFile.__init__\u001b[1;34m(self, path_or_buffer, engine, storage_options, engine_kwargs)\u001b[0m\n\u001b[0;32m   1548\u001b[0m     ext \u001b[38;5;241m=\u001b[39m \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mxls\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m   1549\u001b[0m \u001b[38;5;28;01melse\u001b[39;00m:\n\u001b[1;32m-> 1550\u001b[0m     ext \u001b[38;5;241m=\u001b[39m inspect_excel_format(\n\u001b[0;32m   1551\u001b[0m         content_or_path\u001b[38;5;241m=\u001b[39mpath_or_buffer, storage_options\u001b[38;5;241m=\u001b[39mstorage_options\n\u001b[0;32m   1552\u001b[0m     )\n\u001b[0;32m   1553\u001b[0m     \u001b[38;5;28;01mif\u001b[39;00m ext \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m:\n\u001b[0;32m   1554\u001b[0m         \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mValueError\u001b[39;00m(\n\u001b[0;32m   1555\u001b[0m             \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mExcel file format cannot be determined, you must specify \u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m   1556\u001b[0m             \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124man engine manually.\u001b[39m\u001b[38;5;124m\"\u001b[39m\n\u001b[0;32m   1557\u001b[0m         )\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\io\\excel\\_base.py:1402\u001b[0m, in \u001b[0;36minspect_excel_format\u001b[1;34m(content_or_path, storage_options)\u001b[0m\n\u001b[0;32m   1399\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m \u001b[38;5;28misinstance\u001b[39m(content_or_path, \u001b[38;5;28mbytes\u001b[39m):\n\u001b[0;32m   1400\u001b[0m     content_or_path \u001b[38;5;241m=\u001b[39m BytesIO(content_or_path)\n\u001b[1;32m-> 1402\u001b[0m \u001b[38;5;28;01mwith\u001b[39;00m get_handle(\n\u001b[0;32m   1403\u001b[0m     content_or_path, \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mrb\u001b[39m\u001b[38;5;124m\"\u001b[39m, storage_options\u001b[38;5;241m=\u001b[39mstorage_options, is_text\u001b[38;5;241m=\u001b[39m\u001b[38;5;28;01mFalse\u001b[39;00m\n\u001b[0;32m   1404\u001b[0m ) \u001b[38;5;28;01mas\u001b[39;00m handle:\n\u001b[0;32m   1405\u001b[0m     stream \u001b[38;5;241m=\u001b[39m handle\u001b[38;5;241m.\u001b[39mhandle\n\u001b[0;32m   1406\u001b[0m     stream\u001b[38;5;241m.\u001b[39mseek(\u001b[38;5;241m0\u001b[39m)\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\io\\common.py:882\u001b[0m, in \u001b[0;36mget_handle\u001b[1;34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)\u001b[0m\n\u001b[0;32m    873\u001b[0m         handle \u001b[38;5;241m=\u001b[39m \u001b[38;5;28mopen\u001b[39m(\n\u001b[0;32m    874\u001b[0m             handle,\n\u001b[0;32m    875\u001b[0m             ioargs\u001b[38;5;241m.\u001b[39mmode,\n\u001b[1;32m   (...)\u001b[0m\n\u001b[0;32m    878\u001b[0m             newline\u001b[38;5;241m=\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124m\"\u001b[39m,\n\u001b[0;32m    879\u001b[0m         )\n\u001b[0;32m    880\u001b[0m     \u001b[38;5;28;01melse\u001b[39;00m:\n\u001b[0;32m    881\u001b[0m         \u001b[38;5;66;03m# Binary mode\u001b[39;00m\n\u001b[1;32m--> 882\u001b[0m         handle \u001b[38;5;241m=\u001b[39m \u001b[38;5;28mopen\u001b[39m(handle, ioargs\u001b[38;5;241m.\u001b[39mmode)\n\u001b[0;32m    883\u001b[0m     handles\u001b[38;5;241m.\u001b[39mappend(handle)\n\u001b[0;32m    885\u001b[0m \u001b[38;5;66;03m# Convert BytesIO or file objects passed with an encoding\u001b[39;00m\n",
+      "\u001b[1;31mFileNotFoundError\u001b[0m: [Errno 2] No such file or directory: 'heart.xlsx'"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "df = pd.read_excel(\"heart.xlsx\")\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "69282e37-5cd0-45ff-b267-6aa25e60b2f5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['.ipynb_checkpoints', 'heart.xlsx.csv', 'heartproject.ipynb']"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import os\n",
+    "os.listdir()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "0130e262-5894-4c8b-8e07-d9d872eee64b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv(\"heart.xlsx.csv\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "a68b8860-8c0f-42bb-be8c-82d2d0cd8e1a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>age</th>\n",
+       "      <th>sex</th>\n",
+       "      <th>dataset</th>\n",
+       "      <th>cp</th>\n",
+       "      <th>trestbps</th>\n",
+       "      <th>chol</th>\n",
+       "      <th>fbs</th>\n",
+       "      <th>restecg</th>\n",
+       "      <th>thalch</th>\n",
+       "      <th>exang</th>\n",
+       "      <th>oldpeak</th>\n",
+       "      <th>slope</th>\n",
+       "      <th>ca</th>\n",
+       "      <th>thal</th>\n",
+       "      <th>num</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1</td>\n",
+       "      <td>63</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>Cleveland</td>\n",
+       "      <td>typical angina</td>\n",
+       "      <td>145.0</td>\n",
+       "      <td>233.0</td>\n",
+       "      <td>True</td>\n",
+       "      <td>lv hypertrophy</td>\n",
+       "      <td>150.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>2.3</td>\n",
+       "      <td>downsloping</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>fixed defect</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2</td>\n",
+       "      <td>67</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>Cleveland</td>\n",
+       "      <td>asymptomatic</td>\n",
+       "      <td>160.0</td>\n",
+       "      <td>286.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>lv hypertrophy</td>\n",
+       "      <td>108.0</td>\n",
+       "      <td>True</td>\n",
+       "      <td>1.5</td>\n",
+       "      <td>flat</td>\n",
+       "      <td>3.0</td>\n",
+       "      <td>normal</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>3</td>\n",
+       "      <td>67</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>Cleveland</td>\n",
+       "      <td>asymptomatic</td>\n",
+       "      <td>120.0</td>\n",
+       "      <td>229.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>lv hypertrophy</td>\n",
+       "      <td>129.0</td>\n",
+       "      <td>True</td>\n",
+       "      <td>2.6</td>\n",
+       "      <td>flat</td>\n",
+       "      <td>2.0</td>\n",
+       "      <td>reversable defect</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>4</td>\n",
+       "      <td>37</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>Cleveland</td>\n",
+       "      <td>non-anginal</td>\n",
+       "      <td>130.0</td>\n",
+       "      <td>250.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>normal</td>\n",
+       "      <td>187.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>3.5</td>\n",
+       "      <td>downsloping</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>normal</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>5</td>\n",
+       "      <td>41</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>Cleveland</td>\n",
+       "      <td>atypical angina</td>\n",
+       "      <td>130.0</td>\n",
+       "      <td>204.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>lv hypertrophy</td>\n",
+       "      <td>172.0</td>\n",
+       "      <td>False</td>\n",
+       "      <td>1.4</td>\n",
+       "      <td>upsloping</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>normal</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   id  age     sex    dataset               cp  trestbps   chol    fbs  \\\n",
+       "0   1   63    Male  Cleveland   typical angina     145.0  233.0   True   \n",
+       "1   2   67    Male  Cleveland     asymptomatic     160.0  286.0  False   \n",
+       "2   3   67    Male  Cleveland     asymptomatic     120.0  229.0  False   \n",
+       "3   4   37    Male  Cleveland      non-anginal     130.0  250.0  False   \n",
+       "4   5   41  Female  Cleveland  atypical angina     130.0  204.0  False   \n",
+       "\n",
+       "          restecg  thalch  exang  oldpeak        slope   ca  \\\n",
+       "0  lv hypertrophy   150.0  False      2.3  downsloping  0.0   \n",
+       "1  lv hypertrophy   108.0   True      1.5         flat  3.0   \n",
+       "2  lv hypertrophy   129.0   True      2.6         flat  2.0   \n",
+       "3          normal   187.0  False      3.5  downsloping  0.0   \n",
+       "4  lv hypertrophy   172.0  False      1.4    upsloping  0.0   \n",
+       "\n",
+       "                thal  num  \n",
+       "0       fixed defect    0  \n",
+       "1             normal    2  \n",
+       "2  reversable defect    1  \n",
+       "3             normal    0  \n",
+       "4             normal    0  "
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "7b67e9e3-79f3-44ae-8438-a73fb6281435",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(920, 16)"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "25812e06-4aed-4730-b3d3-15937388d5df",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['id', 'age', 'sex', 'dataset', 'cp', 'trestbps', 'chol', 'fbs',\n",
+       "       'restecg', 'thalch', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'num'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "73a7d871-3afd-480f-a048-8531f0e2f1d8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id            0\n",
+       "age           0\n",
+       "sex           0\n",
+       "dataset       0\n",
+       "cp            0\n",
+       "trestbps     59\n",
+       "chol         30\n",
+       "fbs          90\n",
+       "restecg       2\n",
+       "thalch       55\n",
+       "exang        55\n",
+       "oldpeak      62\n",
+       "slope       309\n",
+       "ca          611\n",
+       "thal        486\n",
+       "num           0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "9075680b-30ec-40a5-b03e-bc7f747c9bee",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "KeyError",
+     "evalue": "\"['ca', 'thal', 'slope'] not found in axis\"",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mKeyError\u001b[0m                                  Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[12], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m df \u001b[38;5;241m=\u001b[39m df\u001b[38;5;241m.\u001b[39mdrop(columns\u001b[38;5;241m=\u001b[39m[\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mca\u001b[39m\u001b[38;5;124m\"\u001b[39m, \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mthal\u001b[39m\u001b[38;5;124m\"\u001b[39m, \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mslope\u001b[39m\u001b[38;5;124m\"\u001b[39m])\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\core\\frame.py:5581\u001b[0m, in \u001b[0;36mDataFrame.drop\u001b[1;34m(self, labels, axis, index, columns, level, inplace, errors)\u001b[0m\n\u001b[0;32m   5433\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;21mdrop\u001b[39m(\n\u001b[0;32m   5434\u001b[0m     \u001b[38;5;28mself\u001b[39m,\n\u001b[0;32m   5435\u001b[0m     labels: IndexLabel \u001b[38;5;241m|\u001b[39m \u001b[38;5;28;01mNone\u001b[39;00m \u001b[38;5;241m=\u001b[39m \u001b[38;5;28;01mNone\u001b[39;00m,\n\u001b[1;32m   (...)\u001b[0m\n\u001b[0;32m   5442\u001b[0m     errors: IgnoreRaise \u001b[38;5;241m=\u001b[39m \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mraise\u001b[39m\u001b[38;5;124m\"\u001b[39m,\n\u001b[0;32m   5443\u001b[0m ) \u001b[38;5;241m-\u001b[39m\u001b[38;5;241m>\u001b[39m DataFrame \u001b[38;5;241m|\u001b[39m \u001b[38;5;28;01mNone\u001b[39;00m:\n\u001b[0;32m   5444\u001b[0m \u001b[38;5;250m    \u001b[39m\u001b[38;5;124;03m\"\"\"\u001b[39;00m\n\u001b[0;32m   5445\u001b[0m \u001b[38;5;124;03m    Drop specified labels from rows or columns.\u001b[39;00m\n\u001b[0;32m   5446\u001b[0m \n\u001b[1;32m   (...)\u001b[0m\n\u001b[0;32m   5579\u001b[0m \u001b[38;5;124;03m            weight  1.0     0.8\u001b[39;00m\n\u001b[0;32m   5580\u001b[0m \u001b[38;5;124;03m    \"\"\"\u001b[39;00m\n\u001b[1;32m-> 5581\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28msuper\u001b[39m()\u001b[38;5;241m.\u001b[39mdrop(\n\u001b[0;32m   5582\u001b[0m         labels\u001b[38;5;241m=\u001b[39mlabels,\n\u001b[0;32m   5583\u001b[0m         axis\u001b[38;5;241m=\u001b[39maxis,\n\u001b[0;32m   5584\u001b[0m         index\u001b[38;5;241m=\u001b[39mindex,\n\u001b[0;32m   5585\u001b[0m         columns\u001b[38;5;241m=\u001b[39mcolumns,\n\u001b[0;32m   5586\u001b[0m         level\u001b[38;5;241m=\u001b[39mlevel,\n\u001b[0;32m   5587\u001b[0m         inplace\u001b[38;5;241m=\u001b[39minplace,\n\u001b[0;32m   5588\u001b[0m         errors\u001b[38;5;241m=\u001b[39merrors,\n\u001b[0;32m   5589\u001b[0m     )\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\core\\generic.py:4788\u001b[0m, in \u001b[0;36mNDFrame.drop\u001b[1;34m(self, labels, axis, index, columns, level, inplace, errors)\u001b[0m\n\u001b[0;32m   4786\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m axis, labels \u001b[38;5;129;01min\u001b[39;00m axes\u001b[38;5;241m.\u001b[39mitems():\n\u001b[0;32m   4787\u001b[0m     \u001b[38;5;28;01mif\u001b[39;00m labels \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m:\n\u001b[1;32m-> 4788\u001b[0m         obj \u001b[38;5;241m=\u001b[39m obj\u001b[38;5;241m.\u001b[39m_drop_axis(labels, axis, level\u001b[38;5;241m=\u001b[39mlevel, errors\u001b[38;5;241m=\u001b[39merrors)\n\u001b[0;32m   4790\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m inplace:\n\u001b[0;32m   4791\u001b[0m     \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m_update_inplace(obj)\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\core\\generic.py:4830\u001b[0m, in \u001b[0;36mNDFrame._drop_axis\u001b[1;34m(self, labels, axis, level, errors, only_slice)\u001b[0m\n\u001b[0;32m   4828\u001b[0m         new_axis \u001b[38;5;241m=\u001b[39m axis\u001b[38;5;241m.\u001b[39mdrop(labels, level\u001b[38;5;241m=\u001b[39mlevel, errors\u001b[38;5;241m=\u001b[39merrors)\n\u001b[0;32m   4829\u001b[0m     \u001b[38;5;28;01melse\u001b[39;00m:\n\u001b[1;32m-> 4830\u001b[0m         new_axis \u001b[38;5;241m=\u001b[39m axis\u001b[38;5;241m.\u001b[39mdrop(labels, errors\u001b[38;5;241m=\u001b[39merrors)\n\u001b[0;32m   4831\u001b[0m     indexer \u001b[38;5;241m=\u001b[39m axis\u001b[38;5;241m.\u001b[39mget_indexer(new_axis)\n\u001b[0;32m   4833\u001b[0m \u001b[38;5;66;03m# Case for non-unique axis\u001b[39;00m\n\u001b[0;32m   4834\u001b[0m \u001b[38;5;28;01melse\u001b[39;00m:\n",
+      "File \u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\core\\indexes\\base.py:7070\u001b[0m, in \u001b[0;36mIndex.drop\u001b[1;34m(self, labels, errors)\u001b[0m\n\u001b[0;32m   7068\u001b[0m \u001b[38;5;28;01mif\u001b[39;00m mask\u001b[38;5;241m.\u001b[39many():\n\u001b[0;32m   7069\u001b[0m     \u001b[38;5;28;01mif\u001b[39;00m errors \u001b[38;5;241m!=\u001b[39m \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mignore\u001b[39m\u001b[38;5;124m\"\u001b[39m:\n\u001b[1;32m-> 7070\u001b[0m         \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mKeyError\u001b[39;00m(\u001b[38;5;124mf\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;132;01m{\u001b[39;00mlabels[mask]\u001b[38;5;241m.\u001b[39mtolist()\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m not found in axis\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n\u001b[0;32m   7071\u001b[0m     indexer \u001b[38;5;241m=\u001b[39m indexer[\u001b[38;5;241m~\u001b[39mmask]\n\u001b[0;32m   7072\u001b[0m \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39mdelete(indexer)\n",
+      "\u001b[1;31mKeyError\u001b[0m: \"['ca', 'thal', 'slope'] not found in axis\""
+     ]
+    }
+   ],
+   "source": [
+    "df = df.drop(columns=[\"ca\", \"thal\", \"slope\"])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "8af48d95-ba26-4db5-977b-7dda97b84383",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['id', 'age', 'sex', 'dataset', 'cp', 'trestbps', 'chol', 'fbs',\n",
+       "       'restecg', 'thalch', 'exang', 'oldpeak', 'num'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "35f7512b-6c07-4652-841c-f2f37d78f6e5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df.columns = df.columns.str.strip()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "06a1edb8-7daa-4307-a05b-dfa0d9dd3150",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['id', 'age', 'sex', 'dataset', 'cp', 'trestbps', 'chol', 'fbs',\n",
+       "       'restecg', 'thalch', 'exang', 'oldpeak', 'num'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "5eb11182-eb59-43dd-93cf-e454f50ab2f2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = df.drop(columns=[\"ca\", \"thalch\", \"slope\"], errors=\"ignore\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "45a27028-8f4b-4a2d-9f91-1c3527757d54",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['id', 'age', 'sex', 'dataset', 'cp', 'trestbps', 'chol', 'fbs',\n",
+       "       'restecg', 'exang', 'oldpeak', 'num'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "1c1d79e3-b111-45d9-b021-3aad90463721",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = df.fillna(df.mean(numeric_only=True))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "15d4156a-0623-4d4b-9549-60e9f9007ba3",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id           0\n",
+       "age          0\n",
+       "sex          0\n",
+       "dataset      0\n",
+       "cp           0\n",
+       "trestbps     0\n",
+       "chol         0\n",
+       "fbs         90\n",
+       "restecg      2\n",
+       "exang       55\n",
+       "oldpeak      0\n",
+       "num          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "45ef59a4-4360-4713-92e1-b1477c76f988",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"num\"] = df[\"num\"].apply(lambda x: 1 if x > 0 else 0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "d39b9978-eab2-4f6a-adec-10020a0671b9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "num\n",
+       "1    509\n",
+       "0    411\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"num\"].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "983b5b67-918b-4b00-80f9-38689e5ed4f9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['id', 'age', 'sex', 'dataset', 'cp', 'trestbps', 'chol', 'fbs',\n",
+       "       'restecg', 'exang', 'oldpeak', 'num'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "e0d9ba58-4b47-41b5-86ab-082a3635c0d8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id           0\n",
+       "age          0\n",
+       "sex          0\n",
+       "dataset      0\n",
+       "cp           0\n",
+       "trestbps     0\n",
+       "chol         0\n",
+       "fbs         90\n",
+       "restecg      2\n",
+       "exang       55\n",
+       "oldpeak      0\n",
+       "num          0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "6f470679-3637-4c0f-a872-e0705d0e677c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "num\n",
+       "1    509\n",
+       "0    411\n",
+       "Name: count, dtype: int64"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[\"num\"].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "1670a954-cda8-474c-af75-44124e91fa21",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = df.drop(columns=[\"id\"])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "00054a91-78ea-4144-ac1d-a1c1a9a92509",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df[\"fbs\"] = df[\"fbs\"].fillna(df[\"fbs\"].mean())\n",
+    "df[\"oldpeak\"] = df[\"oldpeak\"].fillna(df[\"oldpeak\"].mean())\n",
+    "df[\"trestbps\"] = df[\"trestbps\"].fillna(df[\"trestbps\"].mean())\n",
+    "df[\"chol\"] = df[\"chol\"].fillna(df[\"chol\"].mean())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "a650d395-3c9e-4318-b31e-afca2f9b5672",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\amtal\\AppData\\Local\\Temp\\ipykernel_6332\\3821702842.py:2: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`\n",
+      "  df[\"exang\"] = df[\"exang\"].fillna(df[\"exang\"].mode()[0])\n"
+     ]
+    }
+   ],
+   "source": [
+    "df[\"restecg\"] = df[\"restecg\"].fillna(df[\"restecg\"].mode()[0])\n",
+    "df[\"exang\"] = df[\"exang\"].fillna(df[\"exang\"].mode()[0])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "0258214e-20e0-45c9-b224-9556a5d60833",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "age         0\n",
+       "sex         0\n",
+       "dataset     0\n",
+       "cp          0\n",
+       "trestbps    0\n",
+       "chol        0\n",
+       "fbs         0\n",
+       "restecg     0\n",
+       "exang       0\n",
+       "oldpeak     0\n",
+       "num         0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "250fc662-9788-447c-9dac-a004ae77ff0d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X = df.drop(\"num\", axis=1)\n",
+    "y = df[\"num\"]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "3c16c9d0-9280-41d0-bece-04bb93e79286",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X = pd.get_dummies(X, drop_first=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "fcd28f8a-ea4b-4292-8de1-336bb77d01b9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.model_selection import train_test_split\n",
+    "\n",
+    "X_train, X_test, y_train, y_test = train_test_split(\n",
+    "    X, y, test_size=0.2, random_state=42\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "d11aef51-d790-4e41-9d6c-0f942a3bf67e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<style>#sk-container-id-1 {\n",
+       "  /* Definition of color scheme common for light and dark mode */\n",
+       "  --sklearn-color-text: #000;\n",
+       "  --sklearn-color-text-muted: #666;\n",
+       "  --sklearn-color-line: gray;\n",
+       "  /* Definition of color scheme for unfitted estimators */\n",
+       "  --sklearn-color-unfitted-level-0: #fff5e6;\n",
+       "  --sklearn-color-unfitted-level-1: #f6e4d2;\n",
+       "  --sklearn-color-unfitted-level-2: #ffe0b3;\n",
+       "  --sklearn-color-unfitted-level-3: chocolate;\n",
+       "  /* Definition of color scheme for fitted estimators */\n",
+       "  --sklearn-color-fitted-level-0: #f0f8ff;\n",
+       "  --sklearn-color-fitted-level-1: #d4ebff;\n",
+       "  --sklearn-color-fitted-level-2: #b3dbfd;\n",
+       "  --sklearn-color-fitted-level-3: cornflowerblue;\n",
+       "\n",
+       "  /* Specific color for light theme */\n",
+       "  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));\n",
+       "  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));\n",
+       "  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));\n",
+       "  --sklearn-color-icon: #696969;\n",
+       "\n",
+       "  @media (prefers-color-scheme: dark) {\n",
+       "    /* Redefinition of color scheme for dark theme */\n",
+       "    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));\n",
+       "    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));\n",
+       "    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));\n",
+       "    --sklearn-color-icon: #878787;\n",
+       "  }\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 {\n",
+       "  color: var(--sklearn-color-text);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 pre {\n",
+       "  padding: 0;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 input.sk-hidden--visually {\n",
+       "  border: 0;\n",
+       "  clip: rect(1px 1px 1px 1px);\n",
+       "  clip: rect(1px, 1px, 1px, 1px);\n",
+       "  height: 1px;\n",
+       "  margin: -1px;\n",
+       "  overflow: hidden;\n",
+       "  padding: 0;\n",
+       "  position: absolute;\n",
+       "  width: 1px;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-dashed-wrapped {\n",
+       "  border: 1px dashed var(--sklearn-color-line);\n",
+       "  margin: 0 0.4em 0.5em 0.4em;\n",
+       "  box-sizing: border-box;\n",
+       "  padding-bottom: 0.4em;\n",
+       "  background-color: var(--sklearn-color-background);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-container {\n",
+       "  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`\n",
+       "     but bootstrap.min.css set `[hidden] { display: none !important; }`\n",
+       "     so we also need the `!important` here to be able to override the\n",
+       "     default hidden behavior on the sphinx rendered scikit-learn.org.\n",
+       "     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */\n",
+       "  display: inline-block !important;\n",
+       "  position: relative;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-text-repr-fallback {\n",
+       "  display: none;\n",
+       "}\n",
+       "\n",
+       "div.sk-parallel-item,\n",
+       "div.sk-serial,\n",
+       "div.sk-item {\n",
+       "  /* draw centered vertical line to link estimators */\n",
+       "  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));\n",
+       "  background-size: 2px 100%;\n",
+       "  background-repeat: no-repeat;\n",
+       "  background-position: center center;\n",
+       "}\n",
+       "\n",
+       "/* Parallel-specific style estimator block */\n",
+       "\n",
+       "#sk-container-id-1 div.sk-parallel-item::after {\n",
+       "  content: \"\";\n",
+       "  width: 100%;\n",
+       "  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);\n",
+       "  flex-grow: 1;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-parallel {\n",
+       "  display: flex;\n",
+       "  align-items: stretch;\n",
+       "  justify-content: center;\n",
+       "  background-color: var(--sklearn-color-background);\n",
+       "  position: relative;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-parallel-item {\n",
+       "  display: flex;\n",
+       "  flex-direction: column;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-parallel-item:first-child::after {\n",
+       "  align-self: flex-end;\n",
+       "  width: 50%;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-parallel-item:last-child::after {\n",
+       "  align-self: flex-start;\n",
+       "  width: 50%;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-parallel-item:only-child::after {\n",
+       "  width: 0;\n",
+       "}\n",
+       "\n",
+       "/* Serial-specific style estimator block */\n",
+       "\n",
+       "#sk-container-id-1 div.sk-serial {\n",
+       "  display: flex;\n",
+       "  flex-direction: column;\n",
+       "  align-items: center;\n",
+       "  background-color: var(--sklearn-color-background);\n",
+       "  padding-right: 1em;\n",
+       "  padding-left: 1em;\n",
+       "}\n",
+       "\n",
+       "\n",
+       "/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is\n",
+       "clickable and can be expanded/collapsed.\n",
+       "- Pipeline and ColumnTransformer use this feature and define the default style\n",
+       "- Estimators will overwrite some part of the style using the `sk-estimator` class\n",
+       "*/\n",
+       "\n",
+       "/* Pipeline and ColumnTransformer style (default) */\n",
+       "\n",
+       "#sk-container-id-1 div.sk-toggleable {\n",
+       "  /* Default theme specific background. It is overwritten whether we have a\n",
+       "  specific estimator or a Pipeline/ColumnTransformer */\n",
+       "  background-color: var(--sklearn-color-background);\n",
+       "}\n",
+       "\n",
+       "/* Toggleable label */\n",
+       "#sk-container-id-1 label.sk-toggleable__label {\n",
+       "  cursor: pointer;\n",
+       "  display: flex;\n",
+       "  width: 100%;\n",
+       "  margin-bottom: 0;\n",
+       "  padding: 0.5em;\n",
+       "  box-sizing: border-box;\n",
+       "  text-align: center;\n",
+       "  align-items: start;\n",
+       "  justify-content: space-between;\n",
+       "  gap: 0.5em;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 label.sk-toggleable__label .caption {\n",
+       "  font-size: 0.6rem;\n",
+       "  font-weight: lighter;\n",
+       "  color: var(--sklearn-color-text-muted);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 label.sk-toggleable__label-arrow:before {\n",
+       "  /* Arrow on the left of the label */\n",
+       "  content: \"▸\";\n",
+       "  float: left;\n",
+       "  margin-right: 0.25em;\n",
+       "  color: var(--sklearn-color-icon);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {\n",
+       "  color: var(--sklearn-color-text);\n",
+       "}\n",
+       "\n",
+       "/* Toggleable content - dropdown */\n",
+       "\n",
+       "#sk-container-id-1 div.sk-toggleable__content {\n",
+       "  max-height: 0;\n",
+       "  max-width: 0;\n",
+       "  overflow: hidden;\n",
+       "  text-align: left;\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-0);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-toggleable__content.fitted {\n",
+       "  /* fitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-0);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-toggleable__content pre {\n",
+       "  margin: 0.2em;\n",
+       "  border-radius: 0.25em;\n",
+       "  color: var(--sklearn-color-text);\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-0);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-toggleable__content.fitted pre {\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-0);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {\n",
+       "  /* Expand drop-down */\n",
+       "  max-height: 200px;\n",
+       "  max-width: 100%;\n",
+       "  overflow: auto;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {\n",
+       "  content: \"▾\";\n",
+       "}\n",
+       "\n",
+       "/* Pipeline/ColumnTransformer-specific style */\n",
+       "\n",
+       "#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {\n",
+       "  color: var(--sklearn-color-text);\n",
+       "  background-color: var(--sklearn-color-unfitted-level-2);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {\n",
+       "  background-color: var(--sklearn-color-fitted-level-2);\n",
+       "}\n",
+       "\n",
+       "/* Estimator-specific style */\n",
+       "\n",
+       "/* Colorize estimator box */\n",
+       "#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-2);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {\n",
+       "  /* fitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-2);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-label label.sk-toggleable__label,\n",
+       "#sk-container-id-1 div.sk-label label {\n",
+       "  /* The background is the default theme color */\n",
+       "  color: var(--sklearn-color-text-on-default-background);\n",
+       "}\n",
+       "\n",
+       "/* On hover, darken the color of the background */\n",
+       "#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {\n",
+       "  color: var(--sklearn-color-text);\n",
+       "  background-color: var(--sklearn-color-unfitted-level-2);\n",
+       "}\n",
+       "\n",
+       "/* Label box, darken color on hover, fitted */\n",
+       "#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {\n",
+       "  color: var(--sklearn-color-text);\n",
+       "  background-color: var(--sklearn-color-fitted-level-2);\n",
+       "}\n",
+       "\n",
+       "/* Estimator label */\n",
+       "\n",
+       "#sk-container-id-1 div.sk-label label {\n",
+       "  font-family: monospace;\n",
+       "  font-weight: bold;\n",
+       "  display: inline-block;\n",
+       "  line-height: 1.2em;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-label-container {\n",
+       "  text-align: center;\n",
+       "}\n",
+       "\n",
+       "/* Estimator-specific */\n",
+       "#sk-container-id-1 div.sk-estimator {\n",
+       "  font-family: monospace;\n",
+       "  border: 1px dotted var(--sklearn-color-border-box);\n",
+       "  border-radius: 0.25em;\n",
+       "  box-sizing: border-box;\n",
+       "  margin-bottom: 0.5em;\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-0);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-estimator.fitted {\n",
+       "  /* fitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-0);\n",
+       "}\n",
+       "\n",
+       "/* on hover */\n",
+       "#sk-container-id-1 div.sk-estimator:hover {\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-2);\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 div.sk-estimator.fitted:hover {\n",
+       "  /* fitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-2);\n",
+       "}\n",
+       "\n",
+       "/* Specification for estimator info (e.g. \"i\" and \"?\") */\n",
+       "\n",
+       "/* Common style for \"i\" and \"?\" */\n",
+       "\n",
+       ".sk-estimator-doc-link,\n",
+       "a:link.sk-estimator-doc-link,\n",
+       "a:visited.sk-estimator-doc-link {\n",
+       "  float: right;\n",
+       "  font-size: smaller;\n",
+       "  line-height: 1em;\n",
+       "  font-family: monospace;\n",
+       "  background-color: var(--sklearn-color-background);\n",
+       "  border-radius: 1em;\n",
+       "  height: 1em;\n",
+       "  width: 1em;\n",
+       "  text-decoration: none !important;\n",
+       "  margin-left: 0.5em;\n",
+       "  text-align: center;\n",
+       "  /* unfitted */\n",
+       "  border: var(--sklearn-color-unfitted-level-1) 1pt solid;\n",
+       "  color: var(--sklearn-color-unfitted-level-1);\n",
+       "}\n",
+       "\n",
+       ".sk-estimator-doc-link.fitted,\n",
+       "a:link.sk-estimator-doc-link.fitted,\n",
+       "a:visited.sk-estimator-doc-link.fitted {\n",
+       "  /* fitted */\n",
+       "  border: var(--sklearn-color-fitted-level-1) 1pt solid;\n",
+       "  color: var(--sklearn-color-fitted-level-1);\n",
+       "}\n",
+       "\n",
+       "/* On hover */\n",
+       "div.sk-estimator:hover .sk-estimator-doc-link:hover,\n",
+       ".sk-estimator-doc-link:hover,\n",
+       "div.sk-label-container:hover .sk-estimator-doc-link:hover,\n",
+       ".sk-estimator-doc-link:hover {\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-3);\n",
+       "  color: var(--sklearn-color-background);\n",
+       "  text-decoration: none;\n",
+       "}\n",
+       "\n",
+       "div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,\n",
+       ".sk-estimator-doc-link.fitted:hover,\n",
+       "div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,\n",
+       ".sk-estimator-doc-link.fitted:hover {\n",
+       "  /* fitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-3);\n",
+       "  color: var(--sklearn-color-background);\n",
+       "  text-decoration: none;\n",
+       "}\n",
+       "\n",
+       "/* Span, style for the box shown on hovering the info icon */\n",
+       ".sk-estimator-doc-link span {\n",
+       "  display: none;\n",
+       "  z-index: 9999;\n",
+       "  position: relative;\n",
+       "  font-weight: normal;\n",
+       "  right: .2ex;\n",
+       "  padding: .5ex;\n",
+       "  margin: .5ex;\n",
+       "  width: min-content;\n",
+       "  min-width: 20ex;\n",
+       "  max-width: 50ex;\n",
+       "  color: var(--sklearn-color-text);\n",
+       "  box-shadow: 2pt 2pt 4pt #999;\n",
+       "  /* unfitted */\n",
+       "  background: var(--sklearn-color-unfitted-level-0);\n",
+       "  border: .5pt solid var(--sklearn-color-unfitted-level-3);\n",
+       "}\n",
+       "\n",
+       ".sk-estimator-doc-link.fitted span {\n",
+       "  /* fitted */\n",
+       "  background: var(--sklearn-color-fitted-level-0);\n",
+       "  border: var(--sklearn-color-fitted-level-3);\n",
+       "}\n",
+       "\n",
+       ".sk-estimator-doc-link:hover span {\n",
+       "  display: block;\n",
+       "}\n",
+       "\n",
+       "/* \"?\"-specific style due to the `<a>` HTML tag */\n",
+       "\n",
+       "#sk-container-id-1 a.estimator_doc_link {\n",
+       "  float: right;\n",
+       "  font-size: 1rem;\n",
+       "  line-height: 1em;\n",
+       "  font-family: monospace;\n",
+       "  background-color: var(--sklearn-color-background);\n",
+       "  border-radius: 1rem;\n",
+       "  height: 1rem;\n",
+       "  width: 1rem;\n",
+       "  text-decoration: none;\n",
+       "  /* unfitted */\n",
+       "  color: var(--sklearn-color-unfitted-level-1);\n",
+       "  border: var(--sklearn-color-unfitted-level-1) 1pt solid;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 a.estimator_doc_link.fitted {\n",
+       "  /* fitted */\n",
+       "  border: var(--sklearn-color-fitted-level-1) 1pt solid;\n",
+       "  color: var(--sklearn-color-fitted-level-1);\n",
+       "}\n",
+       "\n",
+       "/* On hover */\n",
+       "#sk-container-id-1 a.estimator_doc_link:hover {\n",
+       "  /* unfitted */\n",
+       "  background-color: var(--sklearn-color-unfitted-level-3);\n",
+       "  color: var(--sklearn-color-background);\n",
+       "  text-decoration: none;\n",
+       "}\n",
+       "\n",
+       "#sk-container-id-1 a.estimator_doc_link.fitted:hover {\n",
+       "  /* fitted */\n",
+       "  background-color: var(--sklearn-color-fitted-level-3);\n",
+       "}\n",
+       "</style><div id=\"sk-container-id-1\" class=\"sk-top-container\"><div class=\"sk-text-repr-fallback\"><pre>LogisticRegression(max_iter=1000)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class=\"sk-container\" hidden><div class=\"sk-item\"><div class=\"sk-estimator fitted sk-toggleable\"><input class=\"sk-toggleable__control sk-hidden--visually\" id=\"sk-estimator-id-1\" type=\"checkbox\" checked><label for=\"sk-estimator-id-1\" class=\"sk-toggleable__label fitted sk-toggleable__label-arrow\"><div><div>LogisticRegression</div></div><div><a class=\"sk-estimator-doc-link fitted\" rel=\"noreferrer\" target=\"_blank\" href=\"https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html\">?<span>Documentation for LogisticRegression</span></a><span class=\"sk-estimator-doc-link fitted\">i<span>Fitted</span></span></div></label><div class=\"sk-toggleable__content fitted\"><pre>LogisticRegression(max_iter=1000)</pre></div> </div></div></div></div>"
+      ],
+      "text/plain": [
+       "LogisticRegression(max_iter=1000)"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "from sklearn.linear_model import LogisticRegression\n",
+    "\n",
+    "model = LogisticRegression(max_iter=1000)\n",
+    "model.fit(X_train, y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "085824af-4c57-4536-a0db-83d6ea03d42a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y_pred = model.predict(X_test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "4b498d72-e83f-40f2-8e3f-33659d40664d",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Accuracy: 0.8152173913043478\n",
+      "\n",
+      "Report:\n",
+      "               precision    recall  f1-score   support\n",
+      "\n",
+      "           0       0.77      0.79      0.78        75\n",
+      "           1       0.85      0.83      0.84       109\n",
+      "\n",
+      "    accuracy                           0.82       184\n",
+      "   macro avg       0.81      0.81      0.81       184\n",
+      "weighted avg       0.82      0.82      0.82       184\n",
+      "\n",
+      "\n",
+      "Confusion Matrix:\n",
+      " [[59 16]\n",
+      " [18 91]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.metrics import accuracy_score, classification_report, confusion_matrix\n",
+    "\n",
+    "print(\"Accuracy:\", accuracy_score(y_test, y_pred))\n",
+    "print(\"\\nReport:\\n\", classification_report(y_test, y_pred))\n",
+    "print(\"\\nConfusion Matrix:\\n\", confusion_matrix(y_test, y_pred))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "8ddca275-f9fb-4bd0-b1c4-51b5be8089e6",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Random Forest Accuracy: 0.8315217391304348\n",
+      "[[62 13]\n",
+      " [18 91]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "from sklearn.ensemble import RandomForestClassifier\n",
+    "\n",
+    "rf_model = RandomForestClassifier(random_state=42)\n",
+    "rf_model.fit(X_train, y_train)\n",
+    "\n",
+    "y_pred_rf = rf_model.predict(X_test)\n",
+    "\n",
+    "from sklearn.metrics import accuracy_score, confusion_matrix\n",
+    "\n",
+    "print(\"Random Forest Accuracy:\", accuracy_score(y_test, y_pred_rf))\n",
+    "print(confusion_matrix(y_test, y_pred_rf))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "034e492c-82ea-4915-ba81-b96d57320703",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "chol                        0.158943\n",
+      "oldpeak                     0.145462\n",
+      "age                         0.134572\n",
+      "trestbps                    0.108432\n",
+      "exang                       0.102517\n",
+      "cp_atypical angina          0.077304\n",
+      "sex_Male                    0.064496\n",
+      "dataset_Switzerland         0.047583\n",
+      "cp_non-anginal              0.043603\n",
+      "restecg_normal              0.022099\n",
+      "dataset_VA Long Beach       0.019351\n",
+      "cp_typical angina           0.017718\n",
+      "dataset_Hungary             0.017500\n",
+      "fbs_True                    0.016085\n",
+      "restecg_st-t abnormality    0.013660\n",
+      "fbs_0.16626506024096385     0.010672\n",
+      "dtype: float64\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "importance = pd.Series(rf_model.feature_importances_, index=X.columns)\n",
+    "importance = importance.sort_values(ascending=False)\n",
+    "\n",
+    "print(importance)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3bd45e66-523a-4fc9-9881-eb106448fcc2",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
